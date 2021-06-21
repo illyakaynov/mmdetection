@@ -3,7 +3,7 @@ ARG CUDA="10.1"
 ARG CUDNN="7"
 FROM pytorch/pytorch:${PYTORCH}-cuda${CUDA}-cudnn${CUDNN}-devel
 
-ARG MMCV="1.2.7"
+ARG MMCV="1.3.2"
 ARG MMDET="2.13.0"
 
 ENV PYTHONUNBUFFERED TRUE
@@ -14,7 +14,7 @@ RUN apt-get update && \
     g++ \
     openjdk-11-jre-headless \
     # MMDet Requirements
-    ffmpeg libsm6 libxext6 git ninja-build libglib2.0-0 libsm6 libxrender-dev libxext6 \
+    ffmpeg libsm6 libxext6 git ninja-build libglib2.0-0 libsm6 libxrender-dev libxext6 libgl1-mesa-glx  \
     && rm -rf /var/lib/apt/lists/*
 
 ENV PATH="/opt/conda/bin:$PATH"
