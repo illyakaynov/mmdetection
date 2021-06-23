@@ -14,7 +14,7 @@ RUN apt-get update && \
     g++ \
     openjdk-11-jre-headless \
     # MMDet Requirements
-    ffmpeg libsm6 libxext6 git ninja-build libglib2.0-0 libsm6 libxrender-dev libxext6 \
+    ffmpeg libsm6 libxext6 git ninja-build libglib2.0-0 libsm6 libxrender-dev libxext6 libgl1-mesa-glx  \
     && rm -rf /var/lib/apt/lists/*
 
 ENV PATH="/opt/conda/bin:$PATH"
