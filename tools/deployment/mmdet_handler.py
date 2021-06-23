@@ -62,8 +62,9 @@ class MMdetHandler(BaseHandler):
                     score = float(bbox[-1])
                     if score >= self.threshold:
                         output[image_index].append({
-                            class_name: bbox_coords,
-                            'score': score
+                            'label': class_name,
+                            'bbox': bbox_coords,
+                            'conf': score,
                         })
 
         return output

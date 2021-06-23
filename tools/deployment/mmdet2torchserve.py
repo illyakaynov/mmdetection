@@ -46,10 +46,8 @@ def mmdet2torchserve(
     config = mmcv.Config.fromfile(config_file)
 
     with TemporaryDirectory() as tmpdir:
-        # HOTFIX
-        print(config._filename)
+        # HOTFIX the error with invalid format
         super(mmcv.Config, config).__setattr__('_filename', f'{tmpdir}/config.py')
-        print(config._filename)
         config.dump(f'{tmpdir}/config.py')
 
         args = Namespace(
