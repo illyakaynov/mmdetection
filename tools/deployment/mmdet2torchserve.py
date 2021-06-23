@@ -47,7 +47,9 @@ def mmdet2torchserve(
 
     with TemporaryDirectory() as tmpdir:
         # HOTFIX
+        print(config._filename)
         config._filename = f'{tmpdir}/config.py'
+        print(config._filename)
         config.dump(f'{tmpdir}/config.py')
 
         args = Namespace(
