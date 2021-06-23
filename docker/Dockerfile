@@ -2,6 +2,9 @@ ARG PYTORCH="1.6.0"
 ARG CUDA="10.1"
 ARG CUDNN="7"
 
+ARG MMCV="1.2.7"
+ARG MMDET="2.13.0"
+
 FROM pytorch/pytorch:${PYTORCH}-cuda${CUDA}-cudnn${CUDNN}-devel
 
 ENV TORCH_CUDA_ARCH_LIST="6.0 6.1 7.0+PTX"
@@ -13,11 +16,11 @@ RUN apt-get update && apt-get install -y ffmpeg libsm6 libxext6 git ninja-build 
     && rm -rf /var/lib/apt/lists/*
 
 # Install MMCV
-RUN pip install mmcv-full==latest+torch1.6.0+cu101 -f https://openmmlab.oss-accelerate.aliyuncs.com/mmcv/dist/index.html
+RUN pip install mmcv-full==${MMCV}+torch1.6.0+cu101 -f https://openmmlab.oss-accelerate.aliyuncs.com/mmcv/dist/index.html
 
 # Install MMDetection
 RUN conda clean --all
-RUN git clone https://github.com/open-mmlab/mmdetection.git /mmdetection
+RUN git clone https://github.com/open-mmlab/mmdetection --branch ${MMDET} --single-branch /mmdetection
 WORKDIR /mmdetection
 ENV FORCE_CUDA="1"
 RUN pip install -r requirements/build.txt
